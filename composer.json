@@ -1,7 +1,17 @@
 {
     "name": "pete001/frost-php-sdk",
     "description": "PHP SDK for the Poet Frost API",
+    "type": "library",
+    "keywords": ["php","poet","frost","sdk","api","crypto","blockchain"],
+    "homepage": "https://github.com/pete001/poet-php-sdk",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Pete Cheyne",
+            "email": "pete.cheyne@gmail.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "guzzlehttp/guzzle": "~6.0",
         "vlucas/phpdotenv": "^2.4"
