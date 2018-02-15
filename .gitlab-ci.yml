@@ -1,0 +1,44 @@
+# Select image from https://hub.docker.com/_/php/
+image: php:7.2
+
+# Select what we should cache
+cache:
+  key: $CI_COMMIT_REF_NAME
+  paths:
+  - vendor/
+  - ~/.composer/cache/files
+
+stages:
+  - Test
+  - Validate
+
+before_script:
+# install ssh-agent
+- apt-get update -yqq && apt-get install -yqq openssh-client git
+# run ssh-agent
+- eval $(ssh-agent -s)
+# add ssh key stored in SSH_PRIVATE_KEY variable to the agent store
+- ssh-add <(echo "$SSH_PRIVATE_KEY")
+# disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks)
+# WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
+- mkdir -p ~/.ssh
+- echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+# Install composer
+- curl -sS https://getcomposer.org/installer | php
+# Install all project dependencies
+- php composer.phar install --no-interaction
+# Setup dotenv
+- cp .env.example .env
+
+# Run the tests
+PHP 7.2:
+  stage: Test
+  script:
+  # Run tests
+  - vendor/bin/phpunit
+
+# Validate the code style
+PSR-2:
+  stage: Validate
+  script:
+  - vendor/bin/php-cs-fixer fix --verbose --dry-run

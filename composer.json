@@ -1,0 +1,22 @@
+{
+    "name": "pete001/frost-php-sdk",
+    "description": "PHP SDK for the Poet Frost API",
+    "license": "MIT",
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.0",
+        "phpspec/phpspec": "~2.1",
+        "friendsofphp/php-cs-fixer": "^2.3",
+        "phpmetrics/phpmetrics": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {"CryptoPete\\Frost\\": ["src/"]}
+    },
+    "autoload-dev": {
+        "psr-4": {"CryptoPete\\Frost\\": ["tests/"]}
+    }
+}
