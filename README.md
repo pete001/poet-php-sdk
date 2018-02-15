@@ -131,6 +131,15 @@ If you're as OCD as i am, you might wanna run some static analysis:
 vendor/bin/phpmetrics --report-html="tests/static" .
 ```
 
+## Contributing
+
+All contributions are welcome! Just fire up a PR and pinky swear the code passes the tests, has new tests 
+written to maintain 100% coverage and make sure its PSR-2 compliant: 
+
+```php
+vendor/bin/php-cs-fixer fix --verbose
+```
+
 ## License
 
 As tempting as it is to troll the world by centralising the distribution of an app for the 
