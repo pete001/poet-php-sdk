@@ -2,6 +2,7 @@
 
 use CryptoPete\Frost\Adapter\Http\GuzzleAdapter;
 use CryptoPete\Frost\Adapter\Settings\DotenvAdapter;
+use CryptoPete\Frost\Exception\HttpException;
 use CryptoPete\Frost\FrostController;
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
@@ -75,14 +76,14 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException CryptoPete\Frost\Exception\HttpException
      */
     public function testGetException()
     {
         $settings = $this->getSettingsMock();
         $http = m::mock(Client::class)
             ->shouldReceive('get')
-            ->andThrow(new \Exception('cant connect to mothership'))
+            ->andThrow(new HttpException('cant connect to mothership'))
             ->getMock();
 
         $api = new FrostController(new DotenvAdapter($settings), new GuzzleAdapter($http));
@@ -90,14 +91,14 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException CryptoPete\Frost\Exception\HttpException
      */
     public function testPostException()
     {
         $settings = $this->getSettingsMock();
         $http = m::mock(Client::class)
             ->shouldReceive('post')
-            ->andThrow(new \Exception('cant connect to mothership'))
+            ->andThrow(new HttpException('cant connect to mothership'))
             ->getMock();
 
         $api = new FrostController(new DotenvAdapter($settings), new GuzzleAdapter($http));

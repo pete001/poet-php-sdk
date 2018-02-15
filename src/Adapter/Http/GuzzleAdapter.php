@@ -2,6 +2,7 @@
 
 namespace CryptoPete\Frost\Adapter\Http;
 
+use CryptoPete\Frost\Exception\HttpException;
 use GuzzleHttp\Client as Guzzle;
 
 /**
@@ -41,7 +42,7 @@ class GuzzleAdapter implements HttpInterface
         try {
             $response = $this->client->get($url, ['headers' => ['Accept' => 'application/json', 'token' => $token]]);
         } catch (\Throwable $t) {
-            throw new \Exception("GET Request failed: {$t->getMessage()}");
+            throw new HttpException("GET Request failed: {$t->getMessage()}");
         }
 
         return (string) $response->getBody();
@@ -63,7 +64,7 @@ class GuzzleAdapter implements HttpInterface
         try {
             $response = $this->client->post($url, ['headers' => ['Accept' => 'application/json', 'token' => $token], 'form_params' => $params]);
         } catch (\Throwable $t) {
-            throw new \Exception("POST Request failed: {$t->getMessage()}");
+            throw new HttpException("POST Request failed: {$t->getMessage()}");
         }
 
         return (string) $response->getBody();
