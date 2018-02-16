@@ -7,7 +7,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
 {
     public function testApiReturn()
     {
-        $api = (new FrostFactory)->api();
+        $api = (new FrostFactory)->api('.env.example');
         $this->assertInstanceOf(FrostController::class, $api);
     }
 }

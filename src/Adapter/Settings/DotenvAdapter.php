@@ -2,6 +2,8 @@
 
 namespace CryptoPete\Frost\Adapter\Settings;
 
+use CryptoPete\Frost\Exception\SettingsException;
+use CryptoPete\Frost\Exception\SettingsNotFoundException;
 use Dotenv\Dotenv;
 
 /**
@@ -23,7 +25,13 @@ class DotenvAdapter implements SettingsInterface
      */
     public function __construct(Dotenv $settings)
     {
-        $this->settings = $settings->load();
+        try {
+            $this->settings = $settings->load();
+        } catch (\Dotenv\Exception\InvalidPathException $e) {
+            throw new SettingsNotFoundException('Invalid path to settings config file');
+        } catch (\Throwable $t) {
+            throw new SettingsException('Access to settings failed');
+        }
     }
 
     /**

@@ -3,6 +3,8 @@
 use CryptoPete\Frost\Adapter\Http\GuzzleAdapter;
 use CryptoPete\Frost\Adapter\Settings\DotenvAdapter;
 use CryptoPete\Frost\Exception\HttpException;
+use CryptoPete\Frost\Exception\SettingsException;
+use CryptoPete\Frost\Exception\SettingsNotFoundException;
 use CryptoPete\Frost\FrostController;
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
@@ -78,7 +80,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException CryptoPete\Frost\Exception\HttpException
      */
-    public function testGetException()
+    public function testHttpGetException()
     {
         $settings = $this->getSettingsMock();
         $http = m::mock(Client::class)
@@ -93,7 +95,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException CryptoPete\Frost\Exception\HttpException
      */
-    public function testPostException()
+    public function testHttpPostException()
     {
         $settings = $this->getSettingsMock();
         $http = m::mock(Client::class)
@@ -103,5 +105,35 @@ class ControllerTest extends PHPUnit_Framework_TestCase
 
         $api = new FrostController(new DotenvAdapter($settings), new GuzzleAdapter($http));
         $api->createWork([]);
+    }
+
+    /**
+     * @expectedException CryptoPete\Frost\Exception\SettingsNotFoundException
+     */
+    public function testSettingsPathException()
+    {
+        $settings = m::mock(Dotenv::class)
+            ->shouldReceive('load')
+            ->andThrow(new \Dotenv\Exception\InvalidPathException)
+            ->getMock();
+
+        $http = m::mock(Client::class);
+
+        $api = new FrostController(new DotenvAdapter($settings), new GuzzleAdapter($http));
+    }
+
+    /**
+     * @expectedException CryptoPete\Frost\Exception\SettingsException
+     */
+    public function testSettingsException()
+    {
+        $settings = m::mock(Dotenv::class)
+            ->shouldReceive('load')
+            ->andThrow(new \Exception)
+            ->getMock();
+
+        $http = m::mock(Client::class);
+
+        $api = new FrostController(new DotenvAdapter($settings), new GuzzleAdapter($http));
     }
 }
