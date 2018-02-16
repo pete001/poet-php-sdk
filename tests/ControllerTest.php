@@ -3,8 +3,6 @@
 use CryptoPete\Frost\Adapter\Http\GuzzleAdapter;
 use CryptoPete\Frost\Adapter\Settings\DotenvAdapter;
 use CryptoPete\Frost\Exception\HttpException;
-use CryptoPete\Frost\Exception\SettingsException;
-use CryptoPete\Frost\Exception\SettingsNotFoundException;
 use CryptoPete\Frost\FrostController;
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
