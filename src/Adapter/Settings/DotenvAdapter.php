@@ -14,11 +14,6 @@ use Dotenv\Dotenv;
 class DotenvAdapter implements SettingsInterface
 {
     /**
-     * @var Dotenv
-     */
-    protected $settings;
-
-    /**
      * DotenvAdapter constructor
      *
      * @param Dotenv $client
@@ -26,7 +21,7 @@ class DotenvAdapter implements SettingsInterface
     public function __construct(Dotenv $settings)
     {
         try {
-            $this->settings = $settings->load();
+            $settings->load();
         } catch (\Dotenv\Exception\InvalidPathException $e) {
             throw new SettingsNotFoundException('Invalid path to settings config file');
         } catch (\Throwable $t) {

@@ -53,7 +53,7 @@ class FrostController
     /**
      * Fetch an individual work by passing the unique work id
      *
-     * @param null $id Optional work id
+     * @param string|null $id Optional work id
      *
      * @return array
      */
