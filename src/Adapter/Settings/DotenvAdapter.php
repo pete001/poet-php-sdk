@@ -34,6 +34,6 @@ class DotenvAdapter implements SettingsInterface
      */
     public function apiKey(): string
     {
-        return getenv('FROST_API_KEY');
+        return (string) getenv('FROST_API_KEY');
     }
 }

@@ -1,5 +1,10 @@
 # Po.et Frost API PHP SDK
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pete001/poet-php-sdk/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pete001/poet-php-sdk/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/pete001/poet-php-sdk/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/pete001/poet-php-sdk/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/pete001/poet-php-sdk/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pete001/poet-php-sdk/build-status/master)
+[![StyleCI](https://styleci.io/repos/121667424/shield?branch=master)](https://styleci.io/repos/121667424)
+
 You think blockchain is cool? Check √
 
 You're a techie publisher who wants to stamp and protect their work? Check √
